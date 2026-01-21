@@ -1,35 +1,50 @@
 const express = require("express");
 const cors = require("cors");
+const http = require("http");
 require("dotenv").config();
 
 const connectDB = require("./config/db");
 
-// Initialize Express app
 const app = express();
+const server = http.createServer(app);
 
-// ================== MIDDLEWARE ==================
+// Socket.io
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// ================== DATABASE ==================
-// connectDB()
-//   .then(() => {
-//     console.log("✅ MongoDB connected");
-//   })
-  .catch((err) => {
-    console.error("❌ MongoDB connection failed:", err.message);
-  });
+// Connect DB
+connectDB();
 
-// ================== ROUTES ==================
+// Routes
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
 
-// Root route (important for Vercel test)
+// Test route
 app.get("/", (req, res) => {
-  res.send("Backend is running successfully 🚀");
+  res.send("Backend running on Render 🚀");
 });
 
-// ================== EXPORT APP ==================
-// ❌ DO NOT use app.listen()
-// Vercel will handle the server
-module.exports = app;
+// Socket events
+io.on("connection", (socket) => {
+  console.log("User connected:", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("User disconnected:", socket.id);
+  });
+});
+
+// Render PORT
+const PORT = process.env.PORT || 5000;
+
+// IMPORTANT: listen on server (not app)
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
