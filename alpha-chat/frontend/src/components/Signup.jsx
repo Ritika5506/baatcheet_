@@ -38,11 +38,11 @@ const Signup = () => {
     try {
       setLoading(true);
       setError("");
-      const res = await axios.post("http://localhost:5000/api/auth/signup", { 
-        name, 
-        email, 
-        mobile: mobile || undefined, 
-        password 
+      const res = await axios.post("https://baatcheet-2-xd3b.onrender.com/api/auth/signup", {
+        name,
+        email,
+        mobile: mobile || undefined,
+        password
       });
       if (res.data.user) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -88,7 +88,7 @@ const Signup = () => {
       console.log(`🔵 Attempting ${selectedProvider} signup with email: ${socialEmail}`);
       
       const providerId = `${selectedProvider}_${Date.now()}`;
-      const res = await axios.post("http://localhost:5000/api/auth/social-auth", {
+      const res = await axios.post("https://baatcheet-2-xd3b.onrender.com/api/auth/social-auth", {
         email: socialEmail,
         name: socialEmail.split("@")[0],
         provider: selectedProvider,

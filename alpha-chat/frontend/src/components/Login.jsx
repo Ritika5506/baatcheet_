@@ -18,7 +18,7 @@ const Login = () => {
     try {
       setLoading(true);
       setError("");
-      const res = await axios.post("http://localhost:5000/api/auth/login", { emailOrMobile, password });
+      const res = await axios.post("https://baatcheet-2-xd3b.onrender.com/api/auth/login", { emailOrMobile, password });
       if (res.data.user) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
         navigate("/chat");
@@ -60,7 +60,7 @@ const Login = () => {
       setError("");
       console.log(`🔵 Attempting ${selectedProvider} login with email: ${socialEmail}`);
       
-      const res = await axios.post("http://localhost:5000/api/auth/social-auth", {
+      const res = await axios.post("https://baatcheet-2-xd3b.onrender.com/api/auth/social-auth", {
         email: socialEmail,
         name: socialEmail.split("@")[0],
         provider: selectedProvider,

@@ -5,7 +5,7 @@ const UserList = ({ onSelectUser }) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/users")
+    axios.get("https://baatcheet-2-xd3b.onrender.com/api/users")
       .then(res => setUsers(res.data))
       .catch(err => console.log("Error fetching users:", err));
   }, []);

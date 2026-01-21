@@ -63,7 +63,7 @@ const ChatPage = () => {
       [user._id]: 0
     }));
     // Mark messages as read on the backend
-    axios.put(`http://localhost:5000/api/users/mark-read/${currentUser._id}`, {
+    axios.put(`https://baatcheet-2-xd3b.onrender.com/api/users/mark-read/${currentUser._id}`, {
       senderId: user._id
     }).catch(err => console.log("Error marking messages as read:", err));
   };

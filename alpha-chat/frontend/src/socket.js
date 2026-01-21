@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 console.log("🔌 Initializing socket connection");
 
 // Get API URL from environment variable or use localhost
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL || "https://baatcheet-2-xd3b.onrender.com/";
 
 const socket = io(API_URL, {
   reconnection: true,
