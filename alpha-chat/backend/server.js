@@ -12,10 +12,10 @@ app.use(cors());
 app.use(express.json());
 
 // ================== DATABASE ==================
-connectDB()
-  .then(() => {
-    console.log("✅ MongoDB connected");
-  })
+// connectDB()
+//   .then(() => {
+//     console.log("✅ MongoDB connected");
+//   })
   .catch((err) => {
     console.error("❌ MongoDB connection failed:", err.message);
   });
